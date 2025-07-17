@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.2rem;
+  margin-top: 3rem;
+  width: 100vw;
+  max-width: 100vw;
+}
+
+.sphere {
+  width: clamp(180px, 35vw, 320px);
+  height: clamp(180px, 35vw, 320px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 80px 16px #0002, 0 8px 40px rgba(0,0,0,0.18);
+  transition: background 0.5s, box-shadow 0.5s;
+  position: relative;
+  overflow: visible;
+  animation: gradientMove 6s ease-in-out infinite alternate;
+  user-select: none;
+}
+@keyframes gradientMove {
+  0% { filter: brightness(1.07) saturate(1.1); }
+  50% { filter: brightness(1.12) saturate(1.25) blur(0.5px); }
+  100% { filter: brightness(1.07) saturate(1.1); }
+}
+
+.face {
+  color: #fff;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  text-align: center;
+  padding: 2rem 1.2rem;
+  font-family: 'Nunito', 'Comic Sans MS', 'Comic Sans', cursive;
+  text-shadow: 0 2px 12px #0007, 0 0px 1px #fff9;
+  pointer-events: none;
+  user-select: none;
+}
+
+.input {
+  padding: 0.9rem 1.2rem;
+  border-radius: 2rem;
+  border: 2px solid #ccc;
+  width: clamp(180px, 40vw, 320px);
+  font-size: 1.1rem;
+  outline: none;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 18px #6c63ff11, 0 1px 1px #fff5;
+  margin-top: 0.3rem;
+  margin-bottom: 0.2rem;
+  transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.input:focus {
+  border: 2.5px solid #4fdcff;
+  background: #f8faff;
+  box-shadow: 0 0 0 4px #6c63ff33;
+}
+
+.button {
+  margin-top: 0.5rem;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.13rem;
+  cursor: pointer;
+  background: linear-gradient(90deg, #6c63ff 0%, #4fdcff 100%);
+  box-shadow: 0 2px 18px #4fdcff33;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.button:hover, .button:focus {
+  background: linear-gradient(90deg, #4fff81 0%, #6c63ff 100%);
+  color: #222;
+  box-shadow: 0 4px 24px #4fff8133;
+  transform: scale(1.07);
+}
+
+@media (max-width: 600px) {
+  .container {
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .sphere {
+    width: 90vw;
+    height: 90vw;
+    min-width: 130px;
+    min-height: 130px;
+    max-width: 240px;
+    max-height: 240px;
+  }
+  .input {
+    width: 90vw;
+    max-width: 250px;
+  }
+}
