@@ -18,6 +18,11 @@ const personalities: Record<'neutral' | 'angry' | 'happy' | 'like', { message: s
     gradient: 'linear-gradient(135deg, #4fff81 0%, #4fdcff 100%)',
     shadow: '0 0 60px 10px #4fff8188',
   },
+  like: {
+    message: '',
+    gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    shadow: '0 0 60px 10px #43e97b88',
+  },
 };
 
 interface SphereProps {
@@ -41,6 +46,8 @@ export default function MagicSphere({ onAsk, lastQuestion, repeatCount, onInputC
   const sphereRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const [inputFocus, setInputFocus] = useState(false);
+
+
 
   // Sacudir esfera
   const shakeSphere = async () => {
@@ -138,18 +145,20 @@ export default function MagicSphere({ onAsk, lastQuestion, repeatCount, onInputC
     }
   }, [chat, loading]);
 
+  // Fallback visual si personality está mal
+  const safePersonality = personalities[personality] || personalities['neutral'];
+
   return (
     <div className={styles.container}>
       <motion.div
         ref={sphereRef}
         className={styles.sphere}
         style={{
-          background: personalities[personality].gradient,
-          boxShadow: personalities[personality].shadow,
+          background: safePersonality.gradient,
+          boxShadow: safePersonality.shadow,
           transform: `rotateX(${-mouse.y}deg) rotateY(${mouse.x}deg)`,
           cursor: isDragging ? 'grabbing' : 'grab',
         }}
-        animate={controls}
         drag
         dragConstraints={{ left: -80, right: 80, top: -80, bottom: 80 }}
         dragElastic={0.5}

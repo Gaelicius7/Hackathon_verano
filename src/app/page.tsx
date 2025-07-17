@@ -18,6 +18,7 @@ const gradients = [
 ];
 
 export default function Home() {
+  const [showHistory, setShowHistory] = useState(false);
   const [pendingQuestion, setPendingQuestion] = useState('');
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 }); // Normalizado [0,1]
   // Conversaciones: [{id, title, history: [{question, answer}]}]
@@ -218,38 +219,6 @@ export default function Home() {
           }
         }}
       />
-      <section style={{ maxWidth: 440, margin: "2rem auto", background: "#fff", borderRadius: 18, boxShadow: "0 2px 24px #0002", padding: 28, position: "relative", zIndex: 1 }}>
-        <h2 style={{ fontWeight: 600, fontSize: 20, marginBottom: 16, color: "#a1c4fd" }}>Historial de la conversación activa</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
-          {activeHistory.map((item, i) => (
-            <div
-              key={i}
-              style={{
-                background: gradients[(i+2)%gradients.length],
-                color: "#fff",
-                borderRadius: 18,
-                boxShadow: "0 2px 16px #a1c4fd22",
-                padding: "12px 18px",
-                minWidth: 120,
-                cursor: "pointer",
-                fontWeight: 500,
-                fontSize: 16,
-                transition: "all 0.25s"
-              }}
-            >
-              {item.question.length > 32 ? item.question.slice(0,32)+"..." : item.question}
-            </div>
-          ))}
-        </div>
-        {activeHistory.length > 0 && (
-          <div style={{ marginTop: 18, background: "#fff", borderRadius: 12, boxShadow: "0 1px 8px #c2e9fb33", padding: 16 }}>
-            <div style={{ color: "#a6c1ee", fontWeight: 600, marginBottom: 4 }}>Pregunta:</div>
-            <div style={{ marginBottom: 8 }}>{activeHistory[activeHistory.length-1].question}</div>
-            <div style={{ color: "#f093fb", fontWeight: 600, marginBottom: 4 }}>Respuesta:</div>
-            <div>{activeHistory[activeHistory.length-1].answer}</div>
-          </div>
-        )}
-      </section>
     </animated.main>
   );
 }
